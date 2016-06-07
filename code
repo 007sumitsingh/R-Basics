@@ -26,3 +26,26 @@ rbind(df, data.frame(x = 10, y = "z"))
 #> 2  2 b
 #> 3  3 c
 #> 4 10 z
+
+It’s a common mistake to try and create a data frame by cbind()ing vectors together. This doesn’t work because cbind() will create a matrix unless one of the arguments is already a data frame. Instead use data.frame() directly:
+
+bad <- data.frame(cbind(a = 1:2, b = c("a", "b")))
+str(bad)
+#> 'data.frame':    2 obs. of  2 variables:
+#>  $ a: Factor w/ 2 levels "1","2": 1 2
+#>  $ b: Factor w/ 2 levels "a","b": 1 2
+good <- data.frame(a = 1:2, b = c("a", "b"),
+  stringsAsFactors = FALSE)
+str(good)
+#> 'data.frame':    2 obs. of  2 variables:
+#>  $ a: int  1 2
+#>  $ b: chr  "a" "b"
+
+
+
+
+
+
+
+
+
